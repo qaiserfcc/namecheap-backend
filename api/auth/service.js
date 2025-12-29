@@ -11,12 +11,15 @@ if (!process.env.JWT_SECRET && process.env.NODE_ENV === 'production') {
 }
 
 // Use a cryptographically secure random string for development fallback
+// NOTE: This generates a NEW secret on each restart, invalidating existing tokens.
+// For consistent tokens across restarts, set JWT_SECRET in your .env file.
 const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString('hex');
 const JWT_EXPIRES_IN = '7d';
 
 // Log warning if using default secret in development
 if (!process.env.JWT_SECRET && process.env.NODE_ENV !== 'production') {
-  console.warn('⚠️  WARNING: Using randomly generated JWT secret. Set JWT_SECRET in .env for consistency across restarts!');
+  console.warn('⚠️  WARNING: Using randomly generated JWT secret. Tokens will be invalidated on restart.');
+  console.warn('⚠️  Set JWT_SECRET in .env file for persistent tokens during development.');
 }
 
 class AuthService {

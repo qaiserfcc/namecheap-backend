@@ -1,11 +1,12 @@
 const db = require('../../database/db');
 
 // Payment processing configuration
-// Set ENABLE_PAYMENT_SIMULATION=false in production to ensure real payment processing
-const ENABLE_PAYMENT_SIMULATION = process.env.ENABLE_PAYMENT_SIMULATION !== 'false';
+// Set ENABLE_PAYMENT_SIMULATION=true in development/testing for simulated payments
+// Must be explicitly enabled; defaults to false for safety
+const ENABLE_PAYMENT_SIMULATION = process.env.ENABLE_PAYMENT_SIMULATION === 'true';
 
 if (ENABLE_PAYMENT_SIMULATION && process.env.NODE_ENV === 'production') {
-  console.warn('⚠️  WARNING: Payment simulation is enabled in production! Set ENABLE_PAYMENT_SIMULATION=false to disable.');
+  console.warn('⚠️  WARNING: Payment simulation is enabled in production! Set ENABLE_PAYMENT_SIMULATION=false or remove it.');
 }
 
 class PaymentService {
