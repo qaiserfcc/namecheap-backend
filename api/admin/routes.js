@@ -1,5 +1,6 @@
 const express = require('express');
 const adminService = require('./service');
+const productService = require('../product/service');
 const { authenticateToken, requireAdmin } = require('../auth/middleware');
 
 const router = express.Router();
@@ -23,6 +24,19 @@ router.get('/users', async (req, res, next) => {
   try {
     const users = await adminService.getAllUsers(req.query);
     res.json(users);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Get all products (admin view: includes inactive + variants)
+router.get('/products', async (req, res, next) => {
+  try {
+    const products = await productService.getAllProducts({
+      ...req.query,
+      includeInactive: true,
+    });
+    res.json(products);
   } catch (error) {
     next(error);
   }
@@ -65,6 +79,16 @@ router.put('/users/:id/role', async (req, res, next) => {
   try {
     const { role } = req.body;
     const user = await adminService.updateUserRole(req.params.id, role);
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Toggle user active status
+router.patch('/users/:id/toggle', async (req, res, next) => {
+  try {
+    const user = await adminService.toggleUserStatus(req.params.id);
     res.json(user);
   } catch (error) {
     next(error);

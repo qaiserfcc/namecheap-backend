@@ -52,7 +52,7 @@ class AdminService {
   }
 
   async getAllUsers(filters = {}) {
-    const { role, isActive, limit = 50, offset = 0 } = filters;
+    const { role, isActive, q, limit = 50, offset = 0 } = filters;
 
     let query = 'SELECT id, email, first_name, last_name, phone, role, is_active, created_at FROM users WHERE 1=1';
     const params = [];
@@ -64,9 +64,19 @@ class AdminService {
       paramCount++;
     }
 
+    if (q) {
+      query += ` AND (LOWER(email) LIKE $${paramCount} OR LOWER(first_name) LIKE $${paramCount} OR LOWER(last_name) LIKE $${paramCount})`;
+      params.push(`%${String(q).toLowerCase()}%`);
+      paramCount++;
+    }
+
     if (isActive !== undefined) {
+      const normalizedIsActive =
+        typeof isActive === 'string'
+          ? isActive.toLowerCase() === 'true'
+          : Boolean(isActive);
       query += ` AND is_active = $${paramCount}`;
-      params.push(isActive);
+      params.push(normalizedIsActive);
       paramCount++;
     }
 
@@ -164,6 +174,19 @@ class AdminService {
     }
 
     return { message: 'User deactivated successfully' };
+  }
+
+  async toggleUserStatus(userId) {
+    const result = await db.query(
+      'UPDATE users SET is_active = NOT is_active, updated_at = CURRENT_TIMESTAMP WHERE id = $1 RETURNING id, email, role, is_active',
+      [userId]
+    );
+
+    if (result.rows.length === 0) {
+      throw new Error('User not found');
+    }
+
+    return result.rows[0];
   }
 }
 

@@ -6,6 +6,11 @@
 INSERT INTO users (email, password_hash, first_name, last_name, phone, role) VALUES
 ('admin@example.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Admin', 'User', '1234567890', 'admin');
 
+-- Insert Namecheap admin user (password: password123)
+-- Hash generated with: bcrypt.hash('password123', 10)
+INSERT INTO users (email, password_hash, first_name, last_name, phone, role) VALUES
+('admin@namecheap.to', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Namecheap', 'Admin', '1234567890', 'admin');
+
 -- Insert sample customer user (password: password123)  
 -- Hash generated with: bcrypt.hash('password123', 10)
 INSERT INTO users (email, password_hash, first_name, last_name, phone, role) VALUES

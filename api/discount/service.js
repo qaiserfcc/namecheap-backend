@@ -151,6 +151,19 @@ class DiscountService {
 
     return { message: 'Discount deleted successfully' };
   }
+
+  async toggleDiscountStatus(id) {
+    const result = await db.query(
+      'UPDATE discounts SET is_active = NOT is_active, updated_at = CURRENT_TIMESTAMP WHERE id = $1 RETURNING *',
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      throw new Error('Discount not found');
+    }
+
+    return result.rows[0];
+  }
 }
 
 module.exports = new DiscountService();

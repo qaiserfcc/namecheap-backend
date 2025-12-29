@@ -65,4 +65,14 @@ router.delete('/:id', authenticateToken, requireAdmin, async (req, res, next) =>
   }
 });
 
+// Toggle discount active status (admin only)
+router.patch('/:id/toggle', authenticateToken, requireAdmin, async (req, res, next) => {
+  try {
+    const discount = await discountService.toggleDiscountStatus(req.params.id);
+    res.json(discount);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

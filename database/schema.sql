@@ -29,6 +29,20 @@ CREATE TABLE IF NOT EXISTS products (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Product variants table
+CREATE TABLE IF NOT EXISTS product_variants (
+    id SERIAL PRIMARY KEY,
+    product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+    name VARCHAR(255) NOT NULL,
+    sku VARCHAR(100) UNIQUE,
+    price DECIMAL(10, 2) NOT NULL,
+    stock_quantity INTEGER DEFAULT 0,
+    attributes JSONB DEFAULT '{}'::jsonb,
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Carts table
 CREATE TABLE IF NOT EXISTS carts (
     id SERIAL PRIMARY KEY,
@@ -42,6 +56,7 @@ CREATE TABLE IF NOT EXISTS cart_items (
     id SERIAL PRIMARY KEY,
     cart_id INTEGER REFERENCES carts(id) ON DELETE CASCADE,
     product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
+    variant_id INTEGER REFERENCES product_variants(id) ON DELETE SET NULL,
     quantity INTEGER NOT NULL DEFAULT 1,
     price DECIMAL(10, 2) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -87,6 +102,7 @@ CREATE TABLE IF NOT EXISTS order_items (
     id SERIAL PRIMARY KEY,
     order_id INTEGER REFERENCES orders(id) ON DELETE CASCADE,
     product_id INTEGER REFERENCES products(id) ON DELETE SET NULL,
+    variant_id INTEGER REFERENCES product_variants(id) ON DELETE SET NULL,
     product_name VARCHAR(255) NOT NULL,
     quantity INTEGER NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
@@ -153,6 +169,7 @@ CREATE TABLE IF NOT EXISTS addresses (
 -- Create indexes for better performance
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE INDEX IF NOT EXISTS idx_products_category ON products(category);
+CREATE INDEX IF NOT EXISTS idx_product_variants_product_id ON product_variants(product_id);
 CREATE INDEX IF NOT EXISTS idx_orders_user_id ON orders(user_id);
 CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
 CREATE INDEX IF NOT EXISTS idx_cart_items_cart_id ON cart_items(cart_id);
