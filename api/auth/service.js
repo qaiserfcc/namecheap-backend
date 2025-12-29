@@ -49,8 +49,9 @@ class AuthService {
 
     const user = result.rows[0];
 
-    // Create a cart for the user
+    // Create a cart and wishlist for the user
     await db.query('INSERT INTO carts (user_id) VALUES ($1)', [user.id]);
+    await db.query('INSERT INTO wishlists (user_id) VALUES ($1)', [user.id]);
 
     // Generate token
     const token = this.generateToken(user);

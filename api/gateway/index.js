@@ -7,6 +7,7 @@ require('dotenv').config();
 const authRoutes = require('../auth/routes');
 const productRoutes = require('../product/routes');
 const cartRoutes = require('../cart/routes');
+const wishlistRoutes = require('../wishlist/routes');
 const orderRoutes = require('../order/routes');
 const paymentRoutes = require('../payment/routes');
 const discountRoutes = require('../discount/routes');
@@ -48,6 +49,7 @@ app.get('/api/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/discounts', discountRoutes);
