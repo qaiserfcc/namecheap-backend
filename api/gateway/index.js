@@ -29,6 +29,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('combined'));
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Namecheap E-Commerce API Gateway', 
+    version: '1.0.0',
+    status: 'running',
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
