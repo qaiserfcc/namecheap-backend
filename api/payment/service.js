@@ -1,5 +1,13 @@
 const db = require('../../database/db');
 
+// Payment processing configuration
+// Set ENABLE_PAYMENT_SIMULATION=false in production to ensure real payment processing
+const ENABLE_PAYMENT_SIMULATION = process.env.ENABLE_PAYMENT_SIMULATION !== 'false';
+
+if (ENABLE_PAYMENT_SIMULATION && process.env.NODE_ENV === 'production') {
+  console.warn('⚠️  WARNING: Payment simulation is enabled in production! Set ENABLE_PAYMENT_SIMULATION=false to disable.');
+}
+
 class PaymentService {
   async createPayment(orderId, paymentData) {
     const { paymentMethod, transactionId } = paymentData;
@@ -57,7 +65,12 @@ class PaymentService {
 
     // SIMULATION: Random success/failure (90% success rate)
     // TODO: Replace with actual payment gateway API call
-    const success = Math.random() > 0.1;
+    // Only runs if ENABLE_PAYMENT_SIMULATION is true
+    const success = ENABLE_PAYMENT_SIMULATION ? Math.random() > 0.1 : false;
+    
+    if (!ENABLE_PAYMENT_SIMULATION) {
+      throw new Error('Payment gateway not configured. Please integrate a payment processor (Stripe, PayPal, etc.)');
+    }
 
     const status = success ? 'completed' : 'failed';
 

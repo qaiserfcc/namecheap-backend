@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const db = require('../../database/db');
 
 // JWT Configuration
@@ -9,12 +10,13 @@ if (!process.env.JWT_SECRET && process.env.NODE_ENV === 'production') {
   throw new Error('FATAL: JWT_SECRET environment variable must be set in production!');
 }
 
-const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-change-in-production-' + Date.now();
+// Use a cryptographically secure random string for development fallback
+const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString('hex');
 const JWT_EXPIRES_IN = '7d';
 
 // Log warning if using default secret in development
 if (!process.env.JWT_SECRET && process.env.NODE_ENV !== 'production') {
-  console.warn('⚠️  WARNING: Using default JWT secret. Set JWT_SECRET in .env for security!');
+  console.warn('⚠️  WARNING: Using randomly generated JWT secret. Set JWT_SECRET in .env for consistency across restarts!');
 }
 
 class AuthService {
