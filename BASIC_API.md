@@ -89,9 +89,9 @@ curl https://your-api.vercel.app/api/time
 ```json
 {
   "timestamp": "2025-12-30T17:43:46.136Z",
-  "unix": 1767116626,
-  "formatted": "Tuesday, December 30, 2025 at 05:43:46 PM",
-  "utc": "Tue, 30 Dec 2025 17:43:46 GMT",
+  "unix": 1735579426,
+  "formatted": "Monday, December 30, 2024 at 05:43:46 PM",
+  "utc": "Mon, 30 Dec 2024 17:43:46 GMT",
   "timezone": "UTC"
 }
 ```

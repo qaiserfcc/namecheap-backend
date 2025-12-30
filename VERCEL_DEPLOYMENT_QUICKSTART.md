@@ -14,7 +14,7 @@ Deploy this Express.js API to Vercel in minutes!
 
 1. Go to [vercel.com](https://vercel.com) and log in
 2. Click **"Add New..."** → **"Project"**
-3. Import your GitHub repository `qaiserfcc/namecheap-backend`
+3. Import your GitHub repository (e.g., `your-username/your-backend-repo`)
 4. Vercel will auto-detect the configuration from `vercel.json`
 
 ### Step 2: Configure Environment Variables (Optional)
