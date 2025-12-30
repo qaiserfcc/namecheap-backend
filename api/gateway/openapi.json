@@ -25,7 +25,8 @@
     { "name": "Payments" },
     { "name": "Discounts" },
     { "name": "Admin" },
-    { "name": "Notifications" }
+    { "name": "Notifications" },
+    { "name": "Content" }
   ],
   "components": {
     "securitySchemes": {
@@ -564,6 +565,93 @@
         "security": [{ "bearerAuth": [] }],
         "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
         "responses": { "200": { "description": "OK" }, "401": { "description": "Unauthorized" } }
+      }
+    },
+
+    "/api/content/homepage": {
+      "get": {
+        "tags": ["Content"],
+        "summary": "Get homepage content (featured products, categories, stats, hero)",
+        "responses": {
+          "200": {
+            "description": "Homepage content retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "featuredProducts": { "type": "array" },
+                    "categories": { "type": "array" },
+                    "stats": { "type": "object" },
+                    "newProducts": { "type": "array" },
+                    "bestSellers": { "type": "array" },
+                    "hero": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/content/about": {
+      "get": {
+        "tags": ["Content"],
+        "summary": "Get about page content (mission, vision, values, story)",
+        "responses": {
+          "200": {
+            "description": "About content retrieved successfully"
+          }
+        }
+      }
+    },
+
+    "/api/content/features": {
+      "get": {
+        "tags": ["Content"],
+        "summary": "Get platform features and benefits",
+        "responses": {
+          "200": {
+            "description": "Features content retrieved successfully"
+          }
+        }
+      }
+    },
+
+    "/api/content/testimonials": {
+      "get": {
+        "tags": ["Content"],
+        "summary": "Get customer testimonials",
+        "responses": {
+          "200": {
+            "description": "Testimonials retrieved successfully"
+          }
+        }
+      }
+    },
+
+    "/api/content/faq": {
+      "get": {
+        "tags": ["Content"],
+        "summary": "Get FAQ content organized by category",
+        "responses": {
+          "200": {
+            "description": "FAQ content retrieved successfully"
+          }
+        }
+      }
+    },
+
+    "/api/content/banners": {
+      "get": {
+        "tags": ["Content"],
+        "summary": "Get promotional banners based on active discounts",
+        "responses": {
+          "200": {
+            "description": "Promotional banners retrieved successfully"
+          }
+        }
       }
     },
 

@@ -15,6 +15,7 @@ This backend follows a microservices-style architecture with the following servi
 - **Discount Service**: Coupon codes and promotions
 - **Admin Service**: Dashboard, reports, user management
 - **Notification Service**: User notifications
+- **Content Service**: Homepage, about, features, testimonials, FAQ content for frontend
 
 ## 🚀 Features
 
@@ -28,9 +29,11 @@ This backend follows a microservices-style architecture with the following servi
 - ✅ Discount/coupon system
 - ✅ Admin dashboard and reports
 - ✅ Notification system
+- ✅ Content API for homepage and marketing pages
 - ✅ CORS support for frontend integration
 - ✅ Security with Helmet middleware
 - ✅ Request logging with Morgan
+- ✅ Swagger/OpenAPI documentation
 
 ## 🛠️ Tech Stack
 
@@ -209,6 +212,14 @@ For detailed API documentation, see [API_DOCUMENTATION.md](./API_DOCUMENTATION.m
 - `PUT /api/notifications/read-all` - Mark all as read (protected)
 - `DELETE /api/notifications/:id` - Delete notification (protected)
 
+#### Content (Public)
+- `GET /api/content/homepage` - Get homepage content bundle (featured products, categories, stats, hero)
+- `GET /api/content/about` - Get about page content (mission, vision, values)
+- `GET /api/content/features` - Get platform features and benefits
+- `GET /api/content/testimonials` - Get customer testimonials
+- `GET /api/content/faq` - Get FAQ content organized by category
+- `GET /api/content/banners` - Get promotional banners based on active discounts
+
 ## 🔒 Authentication & Authorization
 
 This API uses JWT (JSON Web Tokens) for authentication. Include the token in the Authorization header:
@@ -304,6 +315,44 @@ This backend is designed to work with a separate frontend application. The front
 1. Make API requests to the backend URL
 2. Include JWT tokens in the Authorization header for protected routes
 3. Handle CORS properly (already configured on backend)
+
+### Frontend Resources
+
+For building a visually beautiful frontend with consistent theming:
+
+- **[Frontend Design Guide](./FRONTEND_DESIGN_GUIDE.md)** - Complete design system with:
+  - Color palette and typography guidelines
+  - React component examples (Hero, ProductCard, Header)
+  - CSS styling with design tokens
+  - API integration patterns
+  - Page layout examples
+
+- **[Frontend Vercel Deployment Guide](./FRONTEND_VERCEL_DEPLOYMENT.md)** - Step-by-step guide to:
+  - Deploy your frontend to Vercel
+  - Configure environment variables
+  - Set up custom domains
+  - Continuous deployment setup
+
+- **[API Documentation](./API_DOCUMENTATION.md)** - Detailed API reference
+- **[Frontend Integration Guide](./FRONTEND_INTEGRATION.md)** - Basic integration patterns
+
+### Using the Content API
+
+The Content API provides structured data for building rich, visually appealing pages:
+
+```javascript
+// Get complete homepage content
+const response = await fetch('http://localhost:3000/api/content/homepage');
+const homepageData = await response.json();
+
+// homepageData includes:
+// - featuredProducts: Top selling products
+// - categories: Product categories with counts
+// - stats: Platform statistics
+// - newProducts: Recently added products
+// - bestSellers: Best selling products
+// - hero: Hero section content with CTAs
+```
 
 Example frontend integration (using fetch):
 
