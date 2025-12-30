@@ -14,6 +14,7 @@ const paymentRoutes = require('../payment/routes');
 const discountRoutes = require('../discount/routes');
 const adminRoutes = require('../admin/routes');
 const notificationRoutes = require('../notification/routes');
+const contentRoutes = require('../content/routes');
 
 const openapiSpec = require('./openapi.json');
 
@@ -70,6 +71,7 @@ app.use('/api/payments', paymentRoutes);
 app.use('/api/discounts', discountRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/content', contentRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

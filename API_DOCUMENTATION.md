@@ -417,6 +417,185 @@ PUT /api/notifications/:id/read
 
 ---
 
+## Content Endpoints
+
+The Content API provides structured data for building visually appealing frontend pages with consistent information across the application.
+
+### Get Homepage Content
+```
+GET /api/content/homepage
+```
+**Description:** Get all homepage data including featured products, categories, stats, new products, and best sellers.
+
+**Response:**
+```json
+{
+  "featuredProducts": [
+    {
+      "id": 1,
+      "name": "Natural Honey",
+      "description": "Pure organic honey from local farms...",
+      "price": 29.99,
+      "category": "Health & Wellness",
+      "sub_category": "Natural Products",
+      "image_url": "https://images.unsplash.com/...",
+      "total_sales": 150
+    }
+  ],
+  "categories": [
+    {
+      "category": "Health & Wellness",
+      "product_count": 15,
+      "min_price": 12.99,
+      "max_price": 59.99,
+      "subcategories": ["Natural Products", "Supplements", "Aromatherapy"]
+    }
+  ],
+  "stats": {
+    "total_products": 30,
+    "total_customers": 250,
+    "total_orders": 500,
+    "total_categories": 3
+  },
+  "newProducts": [...],
+  "bestSellers": [...],
+  "hero": {
+    "title": "Welcome to Namecheap Marketplace",
+    "subtitle": "Discover Premium Quality Products at Unbeatable Prices",
+    "description": "Your trusted e-commerce destination for health, wellness, and beauty products",
+    "cta": {
+      "primary": {
+        "text": "Shop Now",
+        "link": "/products"
+      },
+      "secondary": {
+        "text": "Learn More",
+        "link": "/about"
+      }
+    }
+  }
+}
+```
+
+### Get About Content
+```
+GET /api/content/about
+```
+**Description:** Get about page content including mission, vision, values, and story.
+
+**Response:**
+```json
+{
+  "title": "About Namecheap Marketplace",
+  "mission": "Our mission is to provide high-quality, affordable products...",
+  "vision": "To become the most trusted e-commerce platform...",
+  "values": [
+    {
+      "title": "Quality First",
+      "description": "We source only the finest products from trusted suppliers",
+      "icon": "quality"
+    }
+  ],
+  "story": "Founded with a passion for natural wellness...",
+  "team": {
+    "size": "50+ dedicated professionals",
+    "description": "Our team of experts is committed to bringing you the best shopping experience"
+  }
+}
+```
+
+### Get Features Content
+```
+GET /api/content/features
+```
+**Description:** Get platform features and benefits for marketing pages.
+
+**Response:**
+```json
+{
+  "title": "Why Choose Namecheap Marketplace?",
+  "subtitle": "Experience the difference with our premium features",
+  "features": [
+    {
+      "title": "Free Shipping",
+      "description": "Free shipping on orders over $50",
+      "icon": "shipping",
+      "highlight": true
+    }
+  ]
+}
+```
+
+### Get Testimonials
+```
+GET /api/content/testimonials
+```
+**Description:** Get customer testimonials and reviews.
+
+**Response:**
+```json
+{
+  "title": "What Our Customers Say",
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Sarah Johnson",
+      "role": "Verified Customer",
+      "rating": 5,
+      "comment": "Amazing products and excellent customer service!...",
+      "date": "2024-01-15",
+      "avatar": "https://i.pravatar.cc/150?img=1"
+    }
+  ]
+}
+```
+
+### Get FAQ Content
+```
+GET /api/content/faq
+```
+**Description:** Get frequently asked questions organized by category.
+
+**Response:**
+```json
+{
+  "title": "Frequently Asked Questions",
+  "categories": [
+    {
+      "category": "Orders & Shipping",
+      "questions": [
+        {
+          "question": "How long does shipping take?",
+          "answer": "Standard shipping typically takes 3-5 business days..."
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Get Promotional Banners
+```
+GET /api/content/banners
+```
+**Description:** Get active promotional banners based on current discounts.
+
+**Response:**
+```json
+[
+  {
+    "title": "Welcome discount - 10% off",
+    "code": "WELCOME10",
+    "discountType": "percentage",
+    "discountValue": 10,
+    "validUntil": "2024-02-15T00:00:00.000Z",
+    "cta": "Shop Now"
+  }
+]
+```
+
+---
+
 ## Error Codes
 
 - `200` - Success
