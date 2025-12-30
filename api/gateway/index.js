@@ -49,6 +49,57 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// API Info endpoint
+app.get('/api/info', (req, res) => {
+  res.json({
+    name: 'Namecheap E-Commerce API',
+    version: '1.0.0',
+    description: 'Backend API for e-commerce platform',
+    endpoints: {
+      health: '/api/health',
+      info: '/api/info',
+      time: '/api/time',
+      echo: '/api/echo',
+      docs: '/api/docs'
+    },
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+// Time endpoint - returns server time in various formats
+app.get('/api/time', (req, res) => {
+  const now = new Date();
+  res.json({
+    timestamp: now.toISOString(),
+    unix: Math.floor(now.getTime() / 1000),
+    formatted: now.toLocaleString('en-US', { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    }),
+    utc: now.toUTCString(),
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+  });
+});
+
+// Echo endpoint - echoes back the request data (useful for testing)
+app.post('/api/echo', (req, res) => {
+  res.json({
+    message: 'Echo response',
+    receivedData: req.body,
+    headers: {
+      'content-type': req.get('content-type'),
+      'user-agent': req.get('user-agent')
+    },
+    method: req.method,
+    timestamp: new Date().toISOString()
+  });
+});
+
 // OpenAPI / Swagger
 app.get('/api/openapi.json', (req, res) => {
   res.json(openapiSpec);

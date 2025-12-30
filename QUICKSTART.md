@@ -80,8 +80,9 @@ API Gateway running on port 3000
 
 ## Step 6: Test the API
 
-Open a new terminal and test the health endpoint:
+Open a new terminal and test the basic endpoints:
 
+### Health Check
 ```bash
 curl http://localhost:3000/api/health
 ```
@@ -92,6 +93,23 @@ Expected response:
   "status": "ok",
   "timestamp": "2025-12-29T01:00:00.000Z"
 }
+```
+
+### API Information
+```bash
+curl http://localhost:3000/api/info
+```
+
+### Server Time
+```bash
+curl http://localhost:3000/api/time
+```
+
+### Echo Test (POST)
+```bash
+curl -X POST http://localhost:3000/api/echo \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Hello API!"}'
 ```
 
 ## Quick API Tests

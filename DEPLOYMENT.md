@@ -69,10 +69,22 @@ vercel --prod
 
 ### 4. Verify Deployment
 
-Test your deployed API:
+Test your deployed API with the basic endpoints:
 
 ```bash
+# Health check
 curl https://your-project.vercel.app/api/health
+
+# API info
+curl https://your-project.vercel.app/api/info
+
+# Server time
+curl https://your-project.vercel.app/api/time
+
+# Echo test
+curl -X POST https://your-project.vercel.app/api/echo \
+  -H "Content-Type: application/json" \
+  -d '{"test": "Hello from Vercel!"}'
 ```
 
 Swagger/OpenAPI endpoints:
@@ -288,13 +300,25 @@ postgresql://myuser:mypassword@db.example.com:5432/mydb?sslmode=require
 
 ## Post-Deployment Steps
 
-### 1. Test Health Endpoint
+### 1. Test Basic Endpoints
 
 ```bash
+# Health check
 curl https://your-api-url.com/api/health
+
+# API information
+curl https://your-api-url.com/api/info
+
+# Server time
+curl https://your-api-url.com/api/time
+
+# Echo test
+curl -X POST https://your-api-url.com/api/echo \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Testing deployment"}'
 ```
 
-Expected response:
+Expected health response:
 ```json
 {
   "status": "ok",

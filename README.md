@@ -19,6 +19,13 @@ This backend follows a microservices-style architecture with the following servi
 
 ## 🚀 Features
 
+### Basic API Endpoints
+- ✅ `/api/health` - Health check endpoint
+- ✅ `/api/info` - API information and available endpoints
+- ✅ `/api/time` - Server time in multiple formats
+- ✅ `/api/echo` - Echo POST requests (testing utility)
+- ✅ Ready for Vercel deployment (configured via `vercel.json`)
+
 ### API Capabilities
 - ✅ JWT-based authentication and authorization
 - ✅ User management (registration, login, profile)
@@ -150,6 +157,14 @@ namecheap-backend/
 ## 🔐 API Endpoints
 
 For detailed API documentation, see [API_DOCUMENTATION.md](./API_DOCUMENTATION.md).
+
+### Basic/Utility Endpoints (No Auth Required)
+- `GET /` - API Gateway information
+- `GET /api/health` - Health check
+- `GET /api/info` - API information and available endpoints
+- `GET /api/time` - Server time in multiple formats
+- `POST /api/echo` - Echo POST request data (testing utility)
+- `GET /api/docs` - Swagger/OpenAPI documentation UI
 
 ### Quick Overview
 
