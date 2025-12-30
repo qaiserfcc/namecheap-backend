@@ -5,6 +5,18 @@
 http://localhost:3000/api
 ```
 
+## Swagger / OpenAPI
+
+The API gateway serves an OpenAPI spec and Swagger UI:
+
+- OpenAPI JSON: `GET /api/openapi.json`
+- Swagger UI: `GET /api/docs/`
+
+On Vercel, these are available at:
+
+- `https://<your-project>.vercel.app/api/openapi.json`
+- `https://<your-project>.vercel.app/api/docs/`
+
 ## Authentication
 Most endpoints require authentication. Include the JWT token in the Authorization header:
 ```

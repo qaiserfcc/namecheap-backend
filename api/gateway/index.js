@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const swaggerUi = require('swagger-ui-express');
 require('dotenv').config();
 
 const authRoutes = require('../auth/routes');
@@ -13,6 +14,8 @@ const paymentRoutes = require('../payment/routes');
 const discountRoutes = require('../discount/routes');
 const adminRoutes = require('../admin/routes');
 const notificationRoutes = require('../notification/routes');
+
+const openapiSpec = require('./openapi.json');
 
 const app = express();
 
@@ -44,6 +47,18 @@ app.get('/', (req, res) => {
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
+
+// OpenAPI / Swagger
+app.get('/api/openapi.json', (req, res) => {
+  res.json(openapiSpec);
+});
+
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(openapiSpec, {
+  explorer: true,
+  swaggerOptions: {
+    persistAuthorization: true
+  }
+}));
 
 // Route to different services
 app.use('/api/auth', authRoutes);

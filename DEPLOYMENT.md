@@ -75,6 +75,16 @@ Test your deployed API:
 curl https://your-project.vercel.app/api/health
 ```
 
+Swagger/OpenAPI endpoints:
+
+```bash
+# OpenAPI JSON
+curl https://your-project.vercel.app/api/openapi.json
+
+# Swagger UI (note: /api/docs may redirect to /api/docs/)
+open https://your-project.vercel.app/api/docs/
+```
+
 ## Heroku Deployment
 
 ### 1. Create Heroku App
