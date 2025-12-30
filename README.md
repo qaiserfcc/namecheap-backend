@@ -301,18 +301,26 @@ curl -X POST http://localhost:3000/api/auth/login \
 
 ## 🚀 Deployment
 
-### Vercel Deployment
+### Quick Vercel Deployment
+
+Deploy in minutes! See [VERCEL_DEPLOYMENT_QUICKSTART.md](./VERCEL_DEPLOYMENT_QUICKSTART.md) for a step-by-step guide.
+
+**Basic endpoints work immediately without any configuration!**
+
+### Vercel Deployment (Detailed)
 
 This backend can be deployed to Vercel or any other Node.js hosting platform.
 
 1. Push your code to GitHub
 2. Import project in Vercel
-3. Configure environment variables in Vercel dashboard:
-   - `DATABASE_URL`
-   - `JWT_SECRET`
+3. Deploy! (Basic endpoints work immediately)
+4. Optional: Configure environment variables for advanced features:
+   - `DATABASE_URL` (for e-commerce features)
+   - `JWT_SECRET` (for authentication)
    - `NODE_ENV=production`
    - `FRONTEND_URL`
-4. Deploy
+
+For complete deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
 
 ### Other Platforms
 
